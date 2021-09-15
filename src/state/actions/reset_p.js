@@ -1,16 +1,15 @@
-export const authenticate = (data) => {
+export const settoken = (data) => {
 	return (dispatch) => {
 		dispatch({
-			type: "AUTHENTICATED",
+			type: "SETTOKEN",
 			payload: data,
 		});
 	};
 };
-
-export const logout = () => {
+export const datavalid = () => {
 	return (dispatch) => {
 		dispatch({
-			type: "LOGOUT",
+			type: "VALIDDATA",
 		});
 	};
 };

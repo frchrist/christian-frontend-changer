@@ -1,46 +1,34 @@
 import {useEffect} from "react"
-
-import {useSelector, useDispatch} from "react-redux"
-import {bindActionCreators} from "redux"
-
-import {register as register_req} from "../../helpers/requests/register"
-import * as actions from "../../state/actions/register"
-import * as messageactions from "../../state/actions/message"
+import {useSelector} from "react-redux"
+import {register as register_req} from "../../helpers/requests"
 import Footer from "../../components/simple/footer"
 import Nav from "../../components/simple/nav"
 import {name as AppName, logo} from "../../constant/appname";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import FlashMessage from "../../components/messages/message"
 import {Inputgroup} from "../../components/input"
 import {AuthButton} from "../../components/buttons"
 
-export default function Register(){
+export default function Register({history, register_action, message_action}){
 	useEffect(() => {
 		document.title = "Nous rejoindre pour Commencer les Echanges rapides"
 	}, [])
-	const state = useSelector((state)=>state.register)
-	const dispatch = useDispatch();
-	const _actions = bindActionCreators(actions,dispatch);
-	const m_actions =  bindActionCreators(messageactions,dispatch);
-	const _h = useHistory();
-	let button = {text:state.loading ? "Chargement en cours ..." : "Créer votre compte"}
-
+	const {loading, errors, sponsor} = useSelector((state)=>state.register)
+	let button = "Créer votre compte";
 
 	const handleSubmit = (e)=>{
 		e.preventDefault()
-		register_req(e.target,_actions,m_actions)
+		register_req(e.target,register_action,message_action, history)
 	}
-	if(state.registed){
-		_h.push("/auth/accounts/verified-email")
-	}
+	
 	return (
 		<>
 		<Nav login={true}/>
 		<FlashMessage/>
 
-		   <div className=" relative selection:bg-teal-500 selection:text-white flex justify-evenly tems-center">
-		        <div className="absolute top-0 md:left-8 flex justify-center items-center">
-		          <div className="py-4 flex-1">
+		   		<section className="flex items-center justify-center w-full">
+		        <div className="flex justify-center md:justify-between items-center md:px-4 md:w-10/12 md:space-x-5">
+		          <div className="py-4">
 		            <div className="bg-white rounded-3xl mx-auto overflow-hidden shadow-xl w-96">
 		              <div className="relative h-32 bg-teal-600 rounded-bl-4xl">
 		                <svg className="absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -50,51 +38,53 @@ export default function Register(){
 		              <div className="px-10 pt-2 pb-8 bg-white rounded-tr-4xl">
 		                <div className="flex justify-center items-center"><h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1> 
 		                <img  src={logo} className="w-8 h-8" alt=""/> </div>
-		                <h3 className="text-md font-thin text-sky-800 mt-2">Nous Rejoindre pour une experience de transactions en ligne</h3>
-
-		                <form className="mt-10" action="" method="POST" onSubmit={handleSubmit}>
-		                <input type="hidden" name="sponsor" value={state.sponsor || ""} />
+		                <h3 className="text-xl text-center leading-tight tracking-tight font-semibold text-indigo-900 mt-2">Nous Rejoindre pour une experience de transactions en ligne</h3>
+						<div className="divide-y">
+		                <form className="mt-10 space-y-6" action="" method="POST" onSubmit={handleSubmit}>
+		                <input type="hidden" name="sponsor" value={sponsor || ""} />
 
 		                  <div className="relative">
 		                   	<Inputgroup type={"email"} id={"email"} label={"Addresse Email"}
 		                   	 name={"email"} cls={"focus:border-teal-600"}/>
-		                  	{state.errors?.email && <span className="text-xs text-red-500 font-semibold">{state.errors.email}</span>}
+		                  	{errors?.email && <span className="text-xs text-red-500 font-semibold">{errors.email}</span>}
 		                  </div>
 
-		                  <div className="mt-10 relative">
+		                  <div className=" relative">
 		                    <Inputgroup type={"text"} id={"username"} label={"Pseudo"}
 		                   	 name={"username"} cls={"focus:border-teal-600"}/>
-		                 	{state.errors?.username && <span className="text-xs text-red-500 font-semibold">{state.errors.username}</span>}
+		                 	{errors?.username && <span className="text-xs text-red-500 font-semibold">{errors.username}</span>}
 		                  </div>
 
-		                  <div className="mt-10 relative">
+		                  <div className=" relative">
 		                    <Inputgroup type={"password"} id={"password"} label={"Mot de passe"}
 		                   	 name={"password"} cls={"focus:border-teal-600"}/>
-		                 	{state.errors?.password && <span className="text-xs text-red-500 font-semibold">{state.errors.password}</span>}
+		                 	{errors?.password && <span className="text-xs text-red-500 font-semibold">{errors.password}</span>}
 		                  </div>
 
-		                   <div className="mt-10 relative">
+		                   <div className=" relative">
 		                    <Inputgroup type={"password"} id={"password1"} label={"Confirmé le votre mot de passe"}
 		                   	 name={"password1"} cls={"focus:border-teal-600"}/>
-		                    {state.errors?.password && <span className="text-xs text-red-500 font-semibold">{state.errors.password}</span>}
+		                    {errors?.password && <span className="text-xs text-red-500 font-semibold">{errors.password}</span>}
 		                  </div>
 		
-		                 <AuthButton>{button.text}</AuthButton>
+		                 <AuthButton loading={loading}>{button}</AuthButton>
 		                </form>
-		                <hr className="w-full my-3 bg-gray-500 "/>
-		                <Link to="/auth/client/login" className="mt-4 block text-sm te400er font-medium text-teal-600 hover:underline focus:outline-none focus:ring-2 focus:ring-teal-500"> connectez-vous </Link>
+		            	<div className="mt-3">
+							<span className="text-sm text-gray-800">Avez-vous déja un compte ?</span>
+		                	<Link to="/auth/client/login" className="inlin-block text-sm te400er font-medium text-teal-600 hover:underline focus:outline-none focus:ring-2 focus:ring-teal-500"> connectez-vous </Link>
+						</div>
+						</div>
 		              </div>
 		            </div>
 		          </div>
+
+				  <div className='hidden md:block'>
+					  <img src={require("../../assets/register-illustration.svg").default} alt="" className="w-11/12" />
+				  </div>
+
 		        </div>
-		        <div className="bg-teal-100 min-h-screen full-screen flex justify-center items-center flex-1" style={{
-		        	background:"url(" + require("../../assets/register-bg.jpg").default + ")",
-		        	backgroundSize:"100%",
-		        	backgroundPosition:"center"
-		        }}>
-		       
-		        </div> 
-		    </div>
+				</section>
+		    
 		    <Footer/>
 
 

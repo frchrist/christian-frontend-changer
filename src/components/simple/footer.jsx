@@ -2,27 +2,157 @@ import {domain } from "../../constant/appname";
 
 
 export default function Footer(){
-	return (
-		 <footer className="mt-3 w-full bg-white  flex flex-col items-center justify-center space-y-4">
-        <div className="social-media flex mt-5  space-x-2 ">
-          <a href="http://youtube.com" className="h-6 w-6  text-teal-500 hover:text-red-700 ">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-              <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" fill="currentColor" />
+  return (
+
+      <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+      <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="sm:col-span-2">
+          <a
+            href="/"
+            aria-label="Go home"
+            title="Company"
+            className="inline-flex items-center"
+          >
+            <svg
+              className="w-8 text-purple-700"
+              viewBox="0 0 24 24"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              stroke="currentColor"
+              fill="none"
+            >
+              <rect x="3" y="1" width="7" height="12" />
+              <rect x="3" y="17" width="7" height="6" />
+              <rect x="14" y="1" width="7" height="6" />
+              <rect x="14" y="11" width="7" height="12" />
             </svg>
+            <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+              Company
+            </span>
           </a>
-          <a  href="http://youtube.com" className="h-6 w-6 text-teal-500 hover:text-teal-700">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" fill="currentColor" />
-            </svg>
-          </a>
-          <a href="http://youtube.com" className="h-6 w-6 text-teal-500 hover:text-sky-700">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" fill="currentColor" />
-            </svg>
-          </a>
+          <div className="mt-6 lg:max-w-sm">
+            <p className="text-sm text-gray-800">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam.
+            </p>
+            <p className="mt-4 text-sm text-gray-800">
+              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
+              beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
         </div>
-        <p className="text-gray-500 text-md pb-5">Copyright © 2021 {domain} All Rights Reserved </p>
-      </footer>
-      )
+        <div className="space-y-2 text-sm">
+          <p className="text-base font-bold tracking-wide text-gray-900">
+            Contacts
+          </p>
+          <div className="flex">
+            <p className="mr-1 text-gray-800">Phone:</p>
+            <a
+              href="tel:850-123-5021"
+              aria-label="Our phone"
+              title="Our phone"
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+            >
+              850-123-5021
+            </a>
+          </div>
+          <div className="flex">
+            <p className="mr-1 text-gray-800">Email:</p>
+            <a
+              href="mailto:info@lorem.mail"
+              aria-label="Our email"
+              title="Our email"
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+            >
+              info@lorem.mail
+            </a>
+          </div>
+          <div className="flex">
+            <p className="mr-1 text-gray-800">Address:</p>
+            <a
+              href="https://www.google.com/maps"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Our address"
+              title="Our address"
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+            >
+              312 Lovely Street, NY
+            </a>
+          </div>
+        </div>
+        <div>
+          <span className="text-base font-bold tracking-wide text-gray-900">
+            Social
+          </span>
+          <div className="flex items-center mt-1 space-x-3">
+            <a
+              href="/"
+              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+              </svg>
+            </a>
+            <a
+              href="/"
+              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
+                <circle cx="15" cy="15" r="4" />
+                <path d="M19.999,3h-10C6.14,3,3,6.141,3,10.001v10C3,23.86,6.141,27,10.001,27h10C23.86,27,27,23.859,27,19.999v-10   C27,6.14,23.859,3,19.999,3z M15,21c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S18.309,21,15,21z M22,9c-0.552,0-1-0.448-1-1   c0-0.552,0.448-1,1-1s1,0.448,1,1C23,8.552,22.552,9,22,9z" />
+              </svg>
+            </a>
+            <a
+              href="/"
+              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
+              </svg>
+            </a>
+          </div>
+          <p className="mt-4 text-sm text-gray-500">
+            Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
+            spare ribs salami.
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
+        <p className="text-sm text-gray-600">
+          © Copyright 2020 {domain} Inc. All rights reserved.
+        </p>
+        <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
+          <li>
+            <a
+              href="/"
+              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              F.A.Q
+            </a>
+          </li>
+          <li>
+            <a
+              href="/"
+              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a
+              href="/"
+              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+            >
+              Terms &amp; Conditions
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    )
+	
 		
 } 

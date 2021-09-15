@@ -1,40 +1,67 @@
-import { Switch, Route, Redirect } from "react-router-dom";
-import {useSelector} from "react-redux"
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+//actions
+import * as actions from "../state/actions/auth";
+import * as messageactions from "../state/actions/message";
+import * as register_actions from "../state/actions/register";
+import * as twofactor_actions from "../state/actions/twofactor";
+import { lazy, Suspense } from "react";
 
-import Login from "../views/auth/login";
-import Register from "../views/auth/register";
-import Emailverification from "../views/auth/verified-email";
-import Resetpassword from "../views/auth/reset-password";
-import Resetpassworddone from "../views/auth/reset-password-done";
-import Resetpasswordcomplete from "../views/auth/reset-password-complete";
-import Factor2auth from "../views/auth/factor2auth";
-import {REGISTER, LOGIN,FORGOT_PASSWORD,FORGOT_PASSWORD_DONE,
-	EMAIL_VERIFICATION,FACTOR2AUTH, DASHBORD, FORGOT_PASSWORD_COMPLETE} from "../constant/routes"
+import { REGISTER, LOGIN, FORGOT_PASSWORD, FORGOT_PASSWORD_DONE, 
+	EMAIL_VERIFICATION, FACTOR2AUTH, FORGOT_PASSWORD_COMPLETE } from "../constant/routes";
 //decodé et le mettre dans le state de registration
-
-
-
-
+import LoadingPage from "../components/simple/Loadin";
+const Login = lazy(() => import("../views/auth/login"));
+const Register = lazy(() => import("../views/auth/register"));
+const Emailverification = lazy(() => import("../views/auth/verified-email"));
+const Resetpassword = lazy(() => import("../views/auth/reset-password"));
+const Resetpassworddone = lazy(() => import("../views/auth/reset-password-done"));
+const Resetpasswordcomplete = lazy(() => import("../views/auth/reset-password-complete"));
+const Factor2auth = lazy(() => import("../views/auth/factor2auth"));
 
 function AuthRoutes() {
-	const {is_authenticated} = useSelector(state=>state.auth)
-	if(is_authenticated){
-		return <Redirect to={DASHBORD} />
-	}
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const { twofactordata } = useSelector((state) => state);
+	const auth_action = bindActionCreators(actions, dispatch);
+	const message_action = bindActionCreators(messageactions, dispatch);
+	const register_action = bindActionCreators(register_actions, dispatch);
+	const twofactor_action = bindActionCreators(twofactor_actions, dispatch);
 
+
+	const auth_store = {
+		auth_action,
+		message_action,
+		history,
+		register_action,
+		twofactordata,
+		twofactor_action,
+	};
+	
 	return (
 		<div className="auth">
+			<Suspense fallback={<LoadingPage />}>
 				<Switch>
-					<Route path={LOGIN} exact component={Login} />
-					<Route path={REGISTER}  exact component={Register} />
-					<Route path={EMAIL_VERIFICATION}  exact component={Emailverification} />
-					<Route path={FORGOT_PASSWORD}  exact component={Resetpassword} />
-					<Route path={FORGOT_PASSWORD_DONE}  exact component={Resetpassworddone} />
-					<Route path={FORGOT_PASSWORD_COMPLETE}  exact component={Resetpasswordcomplete} />
-					<Route path={FACTOR2AUTH}  exact component={Factor2auth} />
+					<Route path={LOGIN} exact>
+						{" "}
+						<Login {...auth_store} />{" "}
+					</Route>
+					<Route path={REGISTER} exact>
+						{" "}
+						<Register {...auth_store} />
+					</Route>
+					<Route path={EMAIL_VERIFICATION} exact component={Emailverification} />
+					<Route path={FORGOT_PASSWORD} exact component={Resetpassword} />
+					<Route path={FORGOT_PASSWORD_DONE} exact component={Resetpassworddone} />
+					<Route path={FORGOT_PASSWORD_COMPLETE} exact component={Resetpasswordcomplete} />
+					<Route path={FACTOR2AUTH} exact>
+						<Factor2auth {...auth_store} />{" "}
+					</Route>
 					<Redirect from="/auth" to={LOGIN} />
-					
 				</Switch>
+			</Suspense>
 		</div>
 	);
 }

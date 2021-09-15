@@ -1,16 +1,51 @@
-import {useEffect} from "react"
+//components
 import Footer from "../../components/simple/footer"
 import Nav from "../../components/simple/nav"
 import {Inputgroup} from "../../components/input"
-
-import {Link} from "react-router-dom";
 import {name as AppName, logo} from "../../constant/appname";
 import FlashMessage from "../../components/messages/message"
+import {AuthButton} from "../../components/buttons"
+//request
+import login_request from "../../helpers/requests/login"
+// react state
+import {useEffect, useState, useRef} from "react"
+//routers
+import {Link} from "react-router-dom";
+import {REGISTER, FORGOT_PASSWORD} from '../../constant/routes';
 
-export default function Login(){
+
+export default function Login({
+	auth_action, message_action, history, twofactor_action
+}){
+	const _isMounted = useRef(true);
 	useEffect(() => {
 		document.title = "Authentification du client"
+		return ()=>{
+			_isMounted.current = false
+			console.log("unmouted")
+		}
 	}, [])
+	const [loading, setLoading] = useState(false)
+	const {set} = twofactor_action;
+
+	const send =(e) =>{
+		e.preventDefault()
+		
+			//{history, setLoading, authicatte, setError, showed}
+			const obj = {
+				history,
+				setLoading,
+				setting:set,
+				authenticate:auth_action.authenticate,
+				showed:message_action.showed
+			}
+			setLoading(true)
+			login_request(e.target, obj, _isMounted)
+			
+				
+		
+		
+	}
 	return (
 		<>
 		<Nav/>
@@ -31,21 +66,31 @@ export default function Login(){
 		              <div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
 		                <div className="flex justify-center items-center"><h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1> 
 		                <img  src={logo} className="w-8 h-8" alt="logo"/> </div>
-		                <h3 className="text-md font-thin text-sky-800 mt-2">Indentifiez-vous ici pour commencer vos echanges</h3>
-
-		                <form className="mt-12" action="" method="POST">
+		                <h3 className=" text-opacity-200 text-xl text-center leading-tight tracking-tight font-semibold text-indigo-900 mt-2">Indentifiez-vous ici pour commencer vos echanges</h3>
+		            
+						<div className="divide-y">
+						<form className="mt-6" action="" method="POST" onSubmit={send}>
 		                  <div className="relative">
 		                   <Inputgroup type={"email"} id={"email"} 
 		                   		name={"email"} label={"Addresse Email"} cls={"focus:border-indigo-600"}/>
 		                  </div>
-		                  <div className="mt-10 relative">
+		                  <div className="mt-5 relative">
 		                    <Inputgroup type={"password"} id={"password"} name={"password"}
 		                     label={"Mot de passe"} cls={"focus:border-indigo-600"}/>
 		                  </div>
 		      
-		                  <button type="sumbit" value="Connexion" className="mt-10 px-4 py-2 rounded bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-indigo-500 focus:ring-opacity-80 cursor-pointer"> Connexion</button>
+						  <AuthButton loading={loading}>
+		                  Connexion
+		                  </AuthButton>
+						  <Link  to={FORGOT_PASSWORD} className="mt-4 block text-sm te400er font-medium text-indigo-600 hover:underline focus:outline-none"> Mot de passe oublié ? </Link>
 		                </form>
-		                <Link to="/auth/accounts/forgot-password" className="mt-4 block text-sm te400er font-medium text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500"> Mot de passe oublié ? </Link>
+						<div className="my-2">
+							<span className="text-sm text-gray-400">Avez n'avez pas encore un compte ?</span>
+		                	<Link to={REGISTER} className="block text-sm te400er font-medium text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500"> Créer un compte </Link>
+						</div>
+		                
+						</div>
+
 		              </div>
 		            </div>
 		          </div>

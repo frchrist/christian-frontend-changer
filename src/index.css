@@ -18,7 +18,9 @@
 .full-screen{
   height: 900px;
 }
-
+.top-all{
+  z-index: 99999;
+}
 .peer:-moz-placeholder-shown ~ .peer-placeholder-shown\:top-2 {
   top: 0.5rem;
 }
