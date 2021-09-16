@@ -1,18 +1,20 @@
 const init = {
 	//running or not
-	loading:false,
+	loading: false,
 	//fields errors
-	errors:{},
+	errors: {},
 	//username, email
-}
+};
 
-export default function reducer(state=init, action){
-	switch(action.type){
+export default function reducer(state = init, action) {
+	switch (action.type) {
 		case "LOADING":
-			return {...state, loading:true}
+			return { ...state, loading: true };
 		case "FAILED":
-			return {...state, loggedin:false, loading:false, errors:action.payload}
+			return { ...state, errors: action.payload, loading:false };
+		case 'SUCCESS':
+			return {...state,loading:false}
 		default:
-			return state
+			return state;
 	}
 }

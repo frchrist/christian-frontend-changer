@@ -1,6 +1,6 @@
 import {useEffect} from "react"
 import {useSelector} from "react-redux"
-import {register as register_req} from "../../helpers/requests"
+import {register_request as register_req} from "../../helpers/requests"
 import Footer from "../../components/simple/footer"
 import Nav from "../../components/simple/nav"
 import {name as AppName, logo} from "../../constant/appname";

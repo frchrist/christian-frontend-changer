@@ -3,7 +3,8 @@ import registerReducer from "./register";
 import authReducer from "./auth";
 import messageReducer from "./message";
 import twofactorReducer from "./two_factor";
-
+import loginReducer from "./login";
+import emailVerificationReducer from "./email-verification";
 import resetPasswordReducer from "./reset_p";
 
 export const reducers = combineReducers({
@@ -11,5 +12,7 @@ export const reducers = combineReducers({
 	auth: authReducer,
 	message: messageReducer,
 	resetpassword: resetPasswordReducer,
-	twofactordata:twofactorReducer
+	twofactordata: twofactorReducer,
+	login: loginReducer,
+	email_ver: emailVerificationReducer,
 });

@@ -10,7 +10,7 @@ import {LOGIN } from "../../constant/routes";
 import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
-import { reset_password_complete } from "../../helpers/requests";
+import { reset_password_complete_request } from "../../helpers/requests";
 import * as messageactions from "../../state/actions/message";
 
 export default function Resetpasswordcomplete() {
@@ -32,7 +32,7 @@ export default function Resetpasswordcomplete() {
 		
 		if(document.getElementById("password").value === document.getElementById("password1").value){
 			
-			reset_password_complete(e.target, setLoading, _h, m_actions);
+			reset_password_complete_request(e.target, setLoading, _h, m_actions);
 			return
 		}else{
 			setLoading(false)

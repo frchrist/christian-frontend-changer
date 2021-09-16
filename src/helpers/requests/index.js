@@ -1,6 +1,6 @@
 import axioInstance from "../axios";
-import {EMAIL_VERIFICATION} from "../../constant/routes"
-export const register = (form, { registed, failed, loading }, { showed, hide }, history) => {
+import {EMAIL_VERIFICATION, LOGIN} from "../../constant/routes"
+export const register_request = (form, { registed, failed, loading }, { showed, hide }, history) => {
 	loading();
 	const formdata = new FormData(form);
 	let data = {};
@@ -30,28 +30,24 @@ export const register = (form, { registed, failed, loading }, { showed, hide }, 
 	}
 };
 
-export const Emailverification_code = (form, Succes, Loading, flash) => {
+export const email_verification_request = ({form,success, failed,history,showed}) => {
 	axioInstance
 		.post("/user/email/verification/", new FormData(form))
 		.then((res) => {
-			
-
-				flash({ tag: "success", title: "success", message: res.data.detail });
-				Succes(true);
-				Loading(false);
+				history.push(LOGIN)
+				showed({ tag: "success", title: "success", message: res.data.detail });
+				success()
+				//remove email from localstorage
 				localStorage.removeItem("email")
-			
 		})
 		.catch((errors) => {
-				form.reset()
-				Loading(false);
-				flash({ tag: "warning", title: "Données invalides", message: errors?.response?.data?.Error });
+				failed();
+				showed({ tag: "warning", title: "Données invalides", message: errors?.response?.data?.Error });
 				
-			
 		});
 };
 
-export const reset_password = (form, state, message) => {
+export const reset_password_request = (form, state, message) => {
 	axioInstance
 		.post("/user/change/password/", new FormData(form))
 		.then((response) => {
@@ -63,7 +59,7 @@ export const reset_password = (form, state, message) => {
 		});
 };
 
-export const reset_password_done = (token, uid, setdatavalid,settoken, message, history) => {
+export const reset_password_done_request = (token, uid, setdatavalid,settoken, message, history) => {
 	axioInstance
 		.get(`/user/change/password/check/data/${uid}/${token}/`)
 		.then((response) => {
@@ -77,7 +73,7 @@ export const reset_password_done = (token, uid, setdatavalid,settoken, message, 
 			history.push("/");
 		});
 };
-export const reset_password_complete = (form, loading, h, message) => {
+export const reset_password_complete_request = (form, loading, h, message) => {
 	axioInstance
 		.patch("/user/change/password/complete/", new FormData(form))
 		.then((response) => {

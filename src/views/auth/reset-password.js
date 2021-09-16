@@ -10,7 +10,7 @@ import { name as AppName, logo } from "../../constant/appname";
 import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
-import { reset_password } from "../../helpers/requests";
+import { reset_password_request } from "../../helpers/requests";
 import {LOGIN} from '../../constant/routes';
 export default function Restpassword() {
 	useEffect(() => {
@@ -22,7 +22,7 @@ export default function Restpassword() {
 	const send = (e) => {
 		e.preventDefault();
 		setLoading(true);
-		reset_password(e.target, setLoading, _actions);
+		reset_password_request(e.target, setLoading, _actions);
 	};
 	return (
 		<>

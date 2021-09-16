@@ -7,12 +7,12 @@ import * as actions from "../state/actions/auth";
 import * as messageactions from "../state/actions/message";
 import * as register_actions from "../state/actions/register";
 import * as twofactor_actions from "../state/actions/twofactor";
+import * as login_actions from "../state/actions/login";
 import { lazy, Suspense } from "react";
 
-import { REGISTER, LOGIN, FORGOT_PASSWORD, FORGOT_PASSWORD_DONE, 
-	EMAIL_VERIFICATION, FACTOR2AUTH, FORGOT_PASSWORD_COMPLETE } from "../constant/routes";
+import { REGISTER, LOGIN, FORGOT_PASSWORD, FORGOT_PASSWORD_DONE, EMAIL_VERIFICATION, FACTOR2AUTH, FORGOT_PASSWORD_COMPLETE } from "../constant/routes";
 //decodé et le mettre dans le state de registration
-import LoadingPage from "../components/simple/Loadin";
+import {Authloader} from "../components/simple/loaders";
 const Login = lazy(() => import("../views/auth/login"));
 const Register = lazy(() => import("../views/auth/register"));
 const Emailverification = lazy(() => import("../views/auth/verified-email"));
@@ -29,7 +29,8 @@ function AuthRoutes() {
 	const message_action = bindActionCreators(messageactions, dispatch);
 	const register_action = bindActionCreators(register_actions, dispatch);
 	const twofactor_action = bindActionCreators(twofactor_actions, dispatch);
-
+	const login_action = bindActionCreators(login_actions, dispatch);
+	
 
 	const auth_store = {
 		auth_action,
@@ -38,11 +39,12 @@ function AuthRoutes() {
 		register_action,
 		twofactordata,
 		twofactor_action,
+		login_action,
 	};
-	
+
 	return (
 		<div className="auth">
-			<Suspense fallback={<LoadingPage />}>
+			<Suspense fallback={<Authloader />}>
 				<Switch>
 					<Route path={LOGIN} exact>
 						{" "}

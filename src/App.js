@@ -7,7 +7,7 @@ import {useEffect, lazy, Suspense} from "react"
 import "./App.css";
 import Home from "./views/home";
 import {Faq} from "./views/faq";
-
+import {Isauthloader} from "./components/simple/loaders"
 import Handle404 from "./views/errors/4O4"
 import Ref from "./views/auth/ref";
 import refresh from "./helpers/requests/refresh";
@@ -43,7 +43,7 @@ function App() {
 	})
 	
 	if(auth.is_auth === undefined){
-		return <>.....</>
+		return <Isauthloader/>
 	}
 
 	
@@ -54,7 +54,7 @@ function App() {
 					<Route path="/" exact component={Home} />
 					<Route path="/faq" exact component={Faq} />
 					<Route path="/dashbord"> 
-						<Suspense fallback={"d......"}>
+						<Suspense fallback={<Isauthloader/>}>
 						{auth.access ? 
 								<UserRoutes/>
 								:  
@@ -63,7 +63,7 @@ function App() {
 						</Suspense>
 					</Route>
 					<Route path="/auth" >
-					<Suspense fallback={"d......"}>
+							<Suspense fallback={<Isauthloader/>}>
 						{auth.access ? 
 							<Redirect to={"/dashbord"}/> : 
 							<AuthRoutes/> 

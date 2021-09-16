@@ -1,50 +1,57 @@
-import {useEffect, useState, useRef} from "react"
+import {useEffect,} from "react"
 import Footer from "../../components/simple/footer"
 import Nav from "../../components/simple/nav"
 import {name as AppName, logo} from "../../constant/appname";
-import {Link, useHistory, Redirect} from "react-router-dom";
-import {LOGIN, REGISTER } from "../../constant/routes"
-import {Emailverification_code} from "../../helpers/requests"
+import {useHistory, Redirect} from "react-router-dom";
+import {REGISTER } from "../../constant/routes"
+import {email_verification_request} from "../../helpers/requests"
 import FlashMessage from "../../components/messages/message"
 
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import {bindActionCreators} from "redux"
 import * as messageactions from "../../state/actions/message"
-import CodeInput from "../../components/input/code"
 import {AuthButton} from "../../components/buttons/index"
 
+import * as email_ver_actions from "../../state/actions/email-verification";
+
 export default function EmailVerification(){
-	const _isMounted = useRef(true)
 	useEffect(() => {
 		document.title = "Verifiez votre addresse Email"
-		return ()=>{
-			_isMounted.current = false
-		}
 		
 	}, [])
-
-	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [valid, setValid] = useState(false);
-	const [code, setCode] = useState("")
+	const {loading, code} = useSelector((state)=>state.email_ver)
 	const _h = useHistory();
 	const _d = useDispatch()
 	const {showed} = bindActionCreators(messageactions, _d);
-
+	const {process, failed, success, setCode} = bindActionCreators(email_ver_actions, _d);
+	
+	// process()
+	// console.log(loading)
+	const HandleChange = (e)=>{
+		const value = e.target.value
+		console.log(e.nativeEvent.data)
+		if(!isNaN(e.nativeEvent.data)){
+			setCode(value)
+		}else{
+			e.preventDefault()
+		}
+	
+	}
 
 	const send = (e)=>{
-
 		e.preventDefault()
-		setLoading(true);
 		//requete
-		console.log(_isMounted.current)
-		if(_isMounted.current)
-			Emailverification_code(e.target,setSuccess, setLoading, showed)
+		process() // set loading to true
+		const parms = {
+			form:e.target,
+			success, //set loading to false
+			failed, // set loading to false
+			history:_h, 
+			showed // flash message state
+		}
+		email_verification_request(parms)
 	}
-	if(success){
-		
-		_h.push(LOGIN)
-	}
+
 	if(!localStorage.getItem("email")){
 		return <Redirect to={REGISTER}/>
 	}
@@ -76,12 +83,15 @@ export default function EmailVerification(){
 		                <form className="mt-12" action="" method="POST" onSubmit={send}>
 		                  <div className="relative">
 		                   <input type="hidden"	name="email" value={localStorage.getItem("email")} />
-		                   <input type="hidden"	name="code" value={code} />
-
-							<CodeInput func={setValid} changeCode={setCode}/>
+						  	<div>
+								<input id="code" value={code} onChange={HandleChange} required={true} type="text" name="code" className={"peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none " } placeholder="Entre le code" />
+								<label htmlFor="code" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+								{"Entre le code"}
+							</label>
+							  </div>
 		                  </div>
 		                  
-						{valid && <AuthButton loading={loading}>Envoyer</AuthButton> }
+						<AuthButton loading={loading}>Envoyer</AuthButton> 
 		                </form>
 		              </div>
 		            </div>
