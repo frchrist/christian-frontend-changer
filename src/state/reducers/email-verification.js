@@ -1,22 +1,20 @@
 const init = {
-	loading: false,
-	code:"",
-	
+	load: false,
+	code: "",
 };
-const reducer = (state=init, action) => {
+const reducer = (state = init, action) => {
 	switch (action.type) {
 		case "LOADING":
-			return { ...state, loading: true };
+			return { ...state, load: true };
 		case "FAILED":
-			return { ...state, loading: false };
+			return { ...state, load: false };
 		case "SUCCESS":
-			return { ...state, loading: false };
+			return { ...state, load: false };
 		case "SETCODE":
-			return { ...state, code:action.payload };
+			return { ...state, code: action.payload };
 		default:
-			return state
+			return state;
 	}
 };
-
 
 export default reducer;
