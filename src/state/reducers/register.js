@@ -1,26 +1,26 @@
 const init = {
 	//running or not
-	loading:false,
+	running: false,
 	//success or not
-	registed:false,
-	sponsor:"",
+	registed: false,
+	sponsor: "",
 	//fields errors
-	errors:{},
+	errors: {},
 	//username, email
-	userdata:{}
-}
+	userdata: {},
+};
 
-export default function reducer(state=init, action){
-	switch(action.type){
-		case "LOADING":
-			return {...state, loading:true}
+export default function reducer(state = init, action) {
+	switch (action.type) {
+		case "REGISTER_LOADING":
+			return { ...state, running: true };
 		case "SPONSOR":
-			return {...state, sponsor:action.payload}
+			return { ...state, sponsor: action.payload };
 		case "REGISTED":
-			return {...state, registed:true, loading:false, userdata:action.payload, errors:{}}
-		case "FAILED":
-			return {...state, registed:false, loading:false, errors:action.payload, userdata:{}}
+			return { ...state, registed: true, running: false, userdata: action.payload, errors: {} };
+		case "REGISTER_FAILED":
+			return { ...state, registed: false, running: false, errors: action.payload, userdata: {} };
 		default:
-			return state
+			return state;
 	}
 }

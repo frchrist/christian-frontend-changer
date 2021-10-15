@@ -1,7 +1,8 @@
 import axioInstance from "../axios";
-import {EMAIL_VERIFICATION, LOGIN} from "../../constant/routes"
+import { EMAIL_VERIFICATION, LOGIN } from "../../constant/routes";
 export const register_request = (form, { registed, failed, loading }, { showed, hide }, history) => {
 	loading();
+	console.log("req");
 	const formdata = new FormData(form);
 	let data = {};
 	formdata.forEach((v, k) => {
@@ -13,11 +14,12 @@ export const register_request = (form, { registed, failed, loading }, { showed, 
 			.post("/user/signup/", data)
 			.then((response) => {
 				registed(response.data);
-				localStorage.setItem("email", response.data.email)
+				localStorage.setItem("email", response.data.email);
 				showed({ tag: "success", title: "Compte cftrader", message: "Votre Compte à été bien crée" });
-				history.push(EMAIL_VERIFICATION)
+				history.push(EMAIL_VERIFICATION);
 			})
 			.catch((errors) => {
+				console.log("dd");
 				if (errors.response) {
 					failed(errors?.response?.data);
 				} else {
@@ -26,24 +28,24 @@ export const register_request = (form, { registed, failed, loading }, { showed, 
 				}
 			});
 	} else {
+		console.log("ddd");
 		failed({ password: "password not match !!!" });
 	}
 };
 
-export const email_verification_request = ({form,success, failed,history,showed}) => {
+export const email_verification_request = ({ form, success, failed, history, showed }) => {
 	axioInstance
 		.post("/user/email/verification/", new FormData(form))
 		.then((res) => {
-				history.push(LOGIN)
-				showed({ tag: "success", title: "success", message: res.data.detail });
-				success()
-				//remove email from localstorage
-				localStorage.removeItem("email")
+			history.push(LOGIN);
+			showed({ tag: "success", title: "success", message: res.data.detail });
+			success();
+			//remove email from localstorage
+			localStorage.removeItem("email");
 		})
 		.catch((errors) => {
-				failed();
-				showed({ tag: "warning", title: "Données invalides", message: errors?.response?.data?.Error });
-				
+			failed();
+			showed({ tag: "warning", title: "Données invalides", message: errors?.response?.data?.Error });
 		});
 };
 
@@ -59,7 +61,7 @@ export const reset_password_request = (form, state, message) => {
 		});
 };
 
-export const reset_password_done_request = (token, uid, setdatavalid,settoken, message, history) => {
+export const reset_password_done_request = (token, uid, setdatavalid, settoken, message, history) => {
 	axioInstance
 		.get(`/user/change/password/check/data/${uid}/${token}/`)
 		.then((response) => {
@@ -84,7 +86,7 @@ export const reset_password_complete_request = (form, loading, h, message) => {
 		.catch((e) => {
 			loading(false);
 			if (e.response) {
-				message.showed({ tag: "warning", title: "Erreur", message: e.response.data?.password ||  e.response.data?.detail });
+				message.showed({ tag: "warning", title: "Erreur", message: e.response.data?.password || e.response.data?.detail });
 			} else {
 				message.showed({ tag: "warning", title: "Erreur", message: "Le serveur ne répond pas !!!" });
 			}

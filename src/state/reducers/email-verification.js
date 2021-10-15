@@ -9,7 +9,7 @@ const reducer = (state = init, action) => {
 		case "FAILED":
 			return { ...state, load: false };
 		case "SUCCESS":
-			return { ...state, load: false };
+			return { ...state, load: false, code: "" };
 		case "SETCODE":
 			return { ...state, code: action.payload };
 		default:

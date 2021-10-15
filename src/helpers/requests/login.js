@@ -1,5 +1,5 @@
 import axioInstance from "../axios";
-import { FACTOR2AUTH, DASHBORD } from "../../constant/routes";
+import { FACTOR2AUTH, DASHBORD, EMAIL_VERIFICATION } from "../../constant/routes";
 
 const log = (form, obj) => {
 	//obj = {history, setLoading, authicatte, setError}
@@ -27,6 +27,13 @@ const log = (form, obj) => {
 		.catch((error) => {
 			let msg = "";
 			obj.login_action.failed({ errors: error?.response?.data?.detail });
+			if (error.response?.data?.detail === "Email address is not verified") {
+				localStorage.setItem("email", data.email);
+				axioInstance.post("/user/refresh/email/verification/code", { email: data.email });
+				obj.history.push(EMAIL_VERIFICATION);
+				obj.showed({ tag: "info", title: "Redirect", message: "please active your email address" });
+				return;
+			}
 			if (error.response) {
 				msg = error.response?.data?.detail || "invalid credentials";
 			} else {

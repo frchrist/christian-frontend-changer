@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { REGISTER, LOGIN } from "../../constant/routes";
+import { name } from "../../constant/appname";
 
 const navItem = [
   {
@@ -9,26 +10,23 @@ const navItem = [
   },
 
   {
-    title: "Product",
+    title: "Monnies",
+    link: "/",
+  },
+
+  {
+    title: "Tarif",
     link: "/",
   },
   {
-    title: "Features",
-    link: "/",
-  },
-  {
-    title: "Pricing",
-    link: "/",
-  },
-  {
-    title: "About us",
+    title: "Apropos",
     link: "/",
   },
 ];
-const Nav = ({register}) => {
+const Nav = ({ register }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let ACTION_LINK = register ? REGISTER : LOGIN
-  let ACTION_NAME = register ? "Inscription" : "Connexion"
+  let ACTION_LINK = register ? REGISTER : LOGIN;
+  let ACTION_NAME = register ? "Inscription" : "Connexion";
 
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -40,14 +38,17 @@ const Nav = ({register}) => {
             <rect x="14" y="1" width="7" height="6" />
             <rect x="14" y="11" width="7" height="12" />
           </svg>
-          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Company</span>
+          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">{name}</span>
         </a>
-        <ul className="flex items-center hidden space-x-8 lg:flex">
-          {navItem.map(item=>{
-            return   <li  key={item.title}><Link to={item.link} aria-label={item.title} title={item.title} className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+        <ul className="ml-2 flex items-center hidden space-x-8 lg:flex">
+          {navItem.map((item) => {
+            return (
+              <li key={item.title}>
+                <Link to={item.link} aria-label={item.title} title={item.title} className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
                   {item.title}
-                </Link> </li>
-               
+                </Link>{" "}
+              </li>
+            );
           })}
           <li>
             <Link to={ACTION_LINK} className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
@@ -88,17 +89,19 @@ const Nav = ({register}) => {
                 </div>
                 <nav>
                   <ul className="space-y-4">
-                    {navItem.map(item=>{
-                      return <li  key={item.title}>
+                    {navItem.map((item) => {
+                      return (
+                        <li key={item.title}>
                           <Link to={item.link} key={item.title} aria-label={item.title} title={item.title} className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
-                          {item.title}
+                            {item.title}
                           </Link>
                         </li>
+                      );
                     })}
-                    
+
                     <li>
                       <Link to={ACTION_LINK} className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
-                       {ACTION_NAME}
+                        {ACTION_NAME}
                       </Link>
                     </li>
                   </ul>

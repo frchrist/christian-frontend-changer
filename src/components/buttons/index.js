@@ -1,4 +1,5 @@
 export const AuthButton = ({ type = "submit", cls = "bg-teal-500 hover:bg-teal-400", loading, children }) => {
+
   return (
     <button
       type={type}

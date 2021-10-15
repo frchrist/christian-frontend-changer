@@ -8,23 +8,34 @@ import { AuthButton } from "../../components/buttons";
 //request
 import login_request from "../../helpers/requests/login";
 // react state
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 //routers
 import { Link } from "react-router-dom";
 import { REGISTER, FORGOT_PASSWORD } from "../../constant/routes";
-import { useSelector } from "react-redux";
-export default function Login({ auth_action, login_action, message_action, history, twofactor_action }) {
+import { useHistory } from "react-router-dom";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+//actions
+import * as messageactions from "../../state/actions/message";
+import * as twofactor_actions from "../../state/actions/twofactor";
+import * as login_actions from "../../state/actions/login";
+import * as actions from "../../state/actions/auth";
+export default function Login() {
 	useEffect(() => {
 		document.title = "Authentification du client";
 		return () => {};
 	}, []);
-	const { loading, errors } = useSelector((state) => state.login);
-	const { set } = twofactor_action;
+	const history = useHistory();
+	const twofactor_action = bindActionCreators(twofactor_actions, useDispatch());
+	const auth_action = bindActionCreators(actions, useDispatch());
+	const message_action = bindActionCreators(messageactions, useDispatch());
+	const login_action = bindActionCreators(login_actions, useDispatch());
 
-	console.log("render");
+	const { loading } = useSelector((state) => state.login);
+	const { set } = twofactor_action;
 	const send = (e) => {
 		e.preventDefault();
-
 		//{history, setLoading, authicatte, setError, showed}
 		const obj = {
 			history,

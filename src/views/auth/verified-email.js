@@ -19,6 +19,7 @@ export default function EmailVerification() {
 		document.title = "Verifiez votre addresse Email";
 	}, []);
 	const { load, code } = useSelector((state) => state.email_ver);
+	console.log(code);
 	const _h = useHistory();
 	const _d = useDispatch();
 	const { showed } = bindActionCreators(messageactions, _d);

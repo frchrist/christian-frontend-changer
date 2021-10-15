@@ -8,12 +8,12 @@ const init = {
 
 export default function reducer(state = init, action) {
 	switch (action.type) {
-		case "LOADING":
+		case "LOGIN_LOADING":
 			return { ...state, loading: true };
-		case "FAILED":
-			return { ...state, errors: action.payload, loading:false };
-		case 'SUCCESS':
-			return {...state,loading:false}
+		case "LOGIN_FAILED":
+			return { ...state, errors: action.payload, loading: false };
+		case "SUCCESS":
+			return { ...state, loading: false };
 		default:
 			return state;
 	}

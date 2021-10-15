@@ -1,7 +1,7 @@
 export const loading = (data) => {
 	return (dispatch) => {
 		dispatch({
-			type: "LOADING",
+			type: "LOGIN_LOADING",
 		});
 	};
 };
@@ -9,7 +9,7 @@ export const loading = (data) => {
 export const failed = (errors) => {
 	return (dispatch) => {
 		dispatch({
-			type: "FAILED",
+			type: "LOGIN_FAILED",
 			payload: errors,
 		});
 	};
