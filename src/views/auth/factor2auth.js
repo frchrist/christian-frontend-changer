@@ -9,7 +9,7 @@ import twofactor_request from "../../helpers/requests/twoFactorAuth";
 import CodeInput from "../../components/input/code";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 
 import { bindActionCreators } from "redux";
 
@@ -20,7 +20,7 @@ export default function Factor2auth() {
 	const [loading, setLoading] = useState(false);
 	const [valid, setValid] = useState(false);
 	const [code, setCode] = useState("");
-	const { message_actions, twofactor_actions, auth_actions } = actions;
+	const { message_actions, twofactor_actions, auth_actions } = authentication_actions;
 	const message_action = bindActionCreators(message_actions, useDispatch());
 	const twofactor_action = bindActionCreators(twofactor_actions, useDispatch());
 	const auth_action = bindActionCreators(auth_actions, useDispatch());

@@ -17,14 +17,14 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 //actions
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 export default function Login() {
 	useEffect(() => {
 		document.title = "Authentification du client";
 		return () => {};
 	}, []);
 	const history = useHistory();
-	const { message_actions, twofactor_actions, login_actions, auth_actions } = actions;
+	const { message_actions, twofactor_actions, login_actions, auth_actions } = authentication_actions;
 	const twofactor_action = bindActionCreators(twofactor_actions, useDispatch());
 	const auth_action = bindActionCreators(auth_actions, useDispatch());
 	const message_action = bindActionCreators(message_actions, useDispatch());

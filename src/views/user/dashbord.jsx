@@ -2,10 +2,9 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
 import logout_request from "../../helpers/requests/logout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import FlashMessage from "../../components/messages/message";
-import * as actions from "../../state/actions/auth";
 import Head from "../../components/head";
 import { name } from "../../constant/appname";
 import { Sparklines, SparklinesLine } from "react-sparklines";
@@ -14,62 +13,13 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import ApexChart from "../../components/chart";
-const t_filter_time = [{ element: "3 derniers Jours" }, { element: "3 derniers Mois" }, { element: "3 derniers Années" }];
-const t_filter_status = [{ element: "Terminer" }, { element: "Encours" }, { element: "Echouer" }, { element: "Tout" }];
-const CurrencyData = [
-  {
-    name: "BTC",
-    value: "56298$",
-    up: "1.4%",
-    down: "2%",
-    svg: <Bitcoin className="w-14 h-14 border border-white rounded-full" />,
-  },
-  {
-    name: "ETH",
-    value: "1023$",
-    up: "12%",
-    down: "2.2%",
-    svg: <Etheurium className="w-14 h-14 border border-white rounded-full" />,
-  },
-
-  {
-    name: "LTC",
-    value: "120$",
-    up: "0.2%",
-    down: "0.23%",
-    svg: <Litecoin className="w-14 h-14 border border-white rounded-full" />,
-  },
-];
-
-const recentTransaction = [
-  {
-    ref: "AX72634",
-    date: "12/20/20",
-    type: "PM-JS",
-    amount: "10$",
-    status: "done",
-    description: "Achat de react ",
-  },
-
-  {
-    ref: "AX72634",
-    date: "12/20/20",
-    type: "PM-JS",
-    amount: "10$",
-    status: "pending",
-    description: "",
-  },
-];
-
-const CurrencyClasses = ["bg-gradient-to-tr from-pink-500 to-red-500", " bg-gradient-to-tr from-sky-500 to-purple-600", "bg-gradient-to-tr from-sky-300 to-teal-700"];
-const Dashboard = ({ auth_state, auth_actions }) => {
-  const history = useHistory();
-  const auth_action = bindActionCreators(actions, useDispatch());
-  const logout = (e) => logout_request(auth_action, history);
+import {authentication_actions} from "../../state/actions"
+const Dashboard = () => {
 
   useEffect(() => {
     document.title = " Bienvenue sur " + name;
   }, []);
+  const auth_state = useSelector(s=>s.auth)
   const currentUser = {
     info: auth_state,
   };
@@ -290,4 +240,52 @@ function Th() {
     </thead>
   );
 }
+const t_filter_time = [{ element: "3 derniers Jours" }, { element: "3 derniers Mois" }, { element: "3 derniers Années" }];
+const t_filter_status = [{ element: "Terminer" }, { element: "Encours" }, { element: "Echouer" }, { element: "Tout" }];
+const CurrencyData = [
+  {
+    name: "BTC",
+    value: "56298$",
+    up: "1.4%",
+    down: "2%",
+    svg: <Bitcoin className="w-14 h-14 border border-white rounded-full" />,
+  },
+  {
+    name: "ETH",
+    value: "1023$",
+    up: "12%",
+    down: "2.2%",
+    svg: <Etheurium className="w-14 h-14 border border-white rounded-full" />,
+  },
+
+  {
+    name: "LTC",
+    value: "120$",
+    up: "0.2%",
+    down: "0.23%",
+    svg: <Litecoin className="w-14 h-14 border border-white rounded-full" />,
+  },
+];
+
+const recentTransaction = [
+  {
+    ref: "AX72634",
+    date: "12/20/20",
+    type: "PM-JS",
+    amount: "10$",
+    status: "done",
+    description: "Achat de react ",
+  },
+
+  {
+    ref: "AX72634",
+    date: "12/20/20",
+    type: "PM-JS",
+    amount: "10$",
+    status: "pending",
+    description: "",
+  },
+];
+
+const CurrencyClasses = ["bg-gradient-to-tr from-pink-500 to-red-500", " bg-gradient-to-tr from-sky-500 to-purple-600", "bg-gradient-to-tr from-sky-300 to-teal-700"];
 export default Dashboard;

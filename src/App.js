@@ -2,7 +2,7 @@ import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 //decodé et le mettre dans le state de registration
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as actions from "./state/actions/auth";
+import {authentication_actions} from "./state/actions";
 import { useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import Home from "./views/home";
@@ -18,7 +18,8 @@ const UserRoutes = lazy(() => import("./routes/user"));
 function App() {
 	const { auth } = useSelector((state) => state);
 	const dispatch = useDispatch();
-	const auth_action = bindActionCreators(actions, dispatch);
+	const {auth_actions} = authentication_actions;
+	const auth_action = bindActionCreators(auth_actions, dispatch);
 	useEffect(() => {
 		if (auth.is_auth === undefined) {
 			refresh(auth_action.authenticate, auth_action.logout);

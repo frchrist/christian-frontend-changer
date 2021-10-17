@@ -10,13 +10,13 @@ import FlashMessage from "../../components/messages/message";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AuthButton } from "../../components/buttons/index";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 
 export default function EmailVerification() {
 	useEffect(() => {
 		document.title = "Verifiez votre addresse Email";
 	}, []);
-	const { message_actions, email_verification_actions } = actions;
+	const { message_actions, email_verification_actions } = authentication_actions;
 	const { load, code } = useSelector((state) => state.email_ver);
 	const _h = useHistory();
 	const _d = useDispatch();

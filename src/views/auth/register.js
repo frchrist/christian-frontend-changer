@@ -10,7 +10,7 @@ import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
 import { bindActionCreators } from "redux";
 import { useSelector, useDispatch } from "react-redux";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 
 export default function Register() {
 	useEffect(() => {
@@ -18,7 +18,7 @@ export default function Register() {
 		return () => {};
 	}, []);
 	const history = useHistory();
-	const { message_actions, register_actions } = actions;
+	const { message_actions, register_actions } = authentication_actions;
 	const message_action = bindActionCreators(message_actions, useDispatch());
 	const register_action = bindActionCreators(register_actions, useDispatch());
 	const { running, errors, sponsor } = useSelector((state) => state.register);

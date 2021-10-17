@@ -3,12 +3,12 @@ import { reset_password_done_request } from "../../helpers/requests";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 export default function Restpassword() {
 	useEffect(() => {
 		document.title = "redirect ..";
 	}, []);
-	const { message_actions, reset_password_actions } = actions;
+	const { message_actions, reset_password_actions } = authentication_actions;
 	const { uidb64, token } = useParams();
 	const dispatch = useDispatch();
 	const { datavalid, settoken } = bindActionCreators(reset_password_actions, dispatch);

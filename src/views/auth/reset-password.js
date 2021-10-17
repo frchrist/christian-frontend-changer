@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 
 import Footer from "../../components/simple/footer";
 import Nav from "../../components/simple/nav";
@@ -18,7 +18,7 @@ export default function Restpassword() {
 	}, []);
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
-	const { message_actions } = actions;
+	const { message_actions } = authentication_actions;
 	const _actions = bindActionCreators(message_actions, dispatch);
 	const send = (e) => {
 		e.preventDefault();

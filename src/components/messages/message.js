@@ -3,7 +3,7 @@ import Success from "./success"
 import Warning from "./warning"
 import {useSelector, useDispatch} from "react-redux"
 import {bindActionCreators} from "redux"
-import * as actions from "../../state/actions/message"
+import {authentication_actions} from "../../state/actions"
 
 function Message(tag, title,message){
 	switch(tag){
@@ -21,7 +21,8 @@ function Message(tag, title,message){
 export default function FlashMessage(){
 	const {show, messageData} = useSelector(state=>state.message)
 	const _d = useDispatch();
-	const {hide} =  bindActionCreators(actions,_d);
+	const {message_actions} = authentication_actions;
+	const {hide} =  bindActionCreators(message_actions,_d);
 
 	
 	if(show){

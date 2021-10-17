@@ -11,14 +11,14 @@ import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
 import { reset_password_complete_request } from "../../helpers/requests";
-import actions from "../../state/actions";
+import {authentication_actions} from "../../state/actions";
 export default function Resetpasswordcomplete() {
 	useEffect(() => {
 		document.title = "Nouveau Mot de passe";
 	}, []);
 	const state = useSelector((state) => state.resetpassword);
 	const dispatch = useDispatch();
-	const { message_actions } = actions;
+	const { message_actions } = authentication_actions;
 	const m_actions = bindActionCreators(message_actions, dispatch);
 	const _h = useHistory();
 	const [loading, setLoading] = useState(false);
