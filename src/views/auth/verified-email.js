@@ -9,21 +9,19 @@ import FlashMessage from "../../components/messages/message";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as messageactions from "../../state/actions/message";
 import { AuthButton } from "../../components/buttons/index";
-
-import * as email_ver_actions from "../../state/actions/email-verification";
+import actions from "../../state/actions";
 
 export default function EmailVerification() {
 	useEffect(() => {
 		document.title = "Verifiez votre addresse Email";
 	}, []);
+	const { message_actions, email_verification_actions } = actions;
 	const { load, code } = useSelector((state) => state.email_ver);
-	console.log(code);
 	const _h = useHistory();
 	const _d = useDispatch();
-	const { showed } = bindActionCreators(messageactions, _d);
-	const { process, failed, success, setCode } = bindActionCreators(email_ver_actions, _d);
+	const { showed } = bindActionCreators(message_actions, _d);
+	const { process, failed, success, setCode } = bindActionCreators(email_verification_actions, _d);
 
 	// process()
 	// console.log(loading)
@@ -81,7 +79,7 @@ export default function EmailVerification() {
 								</div>
 								<h3 className="text-md font-thin text-sky-800 mt-2">Entrez le code de véfication</h3>
 
-								<form className="mt-12" action="" method="POST" onSubmit={send}>
+								<form className="mt-6" action="" method="POST" onSubmit={send}>
 									<div className="relative">
 										<input type="hidden" name="email" value={localStorage.getItem("email")} />
 										<div>

@@ -23,6 +23,9 @@ class ApexChart extends React.Component {
         chart: {
           height: 350,
           type: "area",
+          toolbar: {
+            show: false,
+          },
         },
         dataLabels: {
           enabled: false,
@@ -39,7 +42,6 @@ class ApexChart extends React.Component {
             format: "dd/MM/yy HH:mm",
           },
         },
-        toolbar: {},
       },
     };
   }

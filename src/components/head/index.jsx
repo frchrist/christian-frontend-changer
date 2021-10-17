@@ -24,6 +24,12 @@ const navItem = [
     svg: <DashbordIcon className="w-8 h-8" />,
   },
   {
+    title: "Exchange",
+    path: EXCHANGE,
+    svg: <ExchangeIcon className="w-8 h-8" />,
+  },
+
+  {
     title: "Affiliation",
     path: "/",
     svg: <AffiliationIcon className="w-8 h-8" />,
@@ -33,11 +39,6 @@ const navItem = [
     title: "Settings",
     path: SETTINGS,
     svg: <SettingsIcon className="w-8 h-8" />,
-  },
-  {
-    title: "Exchange",
-    path: EXCHANGE,
-    svg: <ExchangeIcon className="w-8 h-8" />,
   },
   {
     title: "Aides",
@@ -102,7 +103,7 @@ const Head = ({ data }) => {
           </div>
         </div>
         {/* desktop */}
-        <div id="desktop" className="w-56 h-screen bg-purple-800 fixed top-0 bottom-0 left-0 hidden md:flex flex-col items-center py-4">
+        <div id="desktop" className="w-56 h-screen bg-purple-900 bg-opacity-90 fixed top-0 bottom-0 left-0 hidden md:flex flex-col items-center py-4">
           <div className="logo w-20 h-20 rounded-full ">
             <Logo className="w-12 h-12" />
           </div>
@@ -159,7 +160,7 @@ function Message({ data }) {
 }
 function DesktopNavItem({ title, path, icon }) {
   return (
-    <Link to={path} className="rounded-l-lg border-transparent transition-all duration-500 border-r-2 hover:border-red-500 text-gray-200 hover:text-indigo-900 flex items-center space-x-3 hover:bg-gray-100 py-4 pl-3">
+    <Link to={path} className="rounded-l-lg border-transparent transition-all duration-200 border-r-2 hover:border-red-500 text-gray-200 hover:text-indigo-900 flex items-center space-x-3 hover:bg-gray-100 py-4 pl-3">
       {icon} <span className="block text-md font-semibold">{title}</span>
     </Link>
   );

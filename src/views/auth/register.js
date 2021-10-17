@@ -8,12 +8,9 @@ import { Link } from "react-router-dom";
 import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
-import * as messageactions from "../../state/actions/message";
-import * as register_actions from "../../state/actions/register";
-
 import { bindActionCreators } from "redux";
-
 import { useSelector, useDispatch } from "react-redux";
+import actions from "../../state/actions";
 
 export default function Register() {
 	useEffect(() => {
@@ -21,10 +18,11 @@ export default function Register() {
 		return () => {};
 	}, []);
 	const history = useHistory();
-
-	const message_action = bindActionCreators(messageactions, useDispatch());
+	const { message_actions, register_actions } = actions;
+	const message_action = bindActionCreators(message_actions, useDispatch());
 	const register_action = bindActionCreators(register_actions, useDispatch());
 	const { running, errors, sponsor } = useSelector((state) => state.register);
+
 	let button = "Créer votre compte";
 
 	const handleSubmit = (e) => {

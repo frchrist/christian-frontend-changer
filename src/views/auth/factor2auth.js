@@ -7,15 +7,28 @@ import { LOGIN } from "../../constant/routes";
 import { AuthButton } from "../../components/buttons";
 import twofactor_request from "../../helpers/requests/twoFactorAuth";
 import CodeInput from "../../components/input/code";
-export default function Factor2auth({ twofactordata, auth_action, message_action, history, twofactor_action }) {
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import actions from "../../state/actions";
+
+import { bindActionCreators } from "redux";
+
+export default function Factor2auth() {
 	useEffect(() => {
 		document.title = "TwoFactor Authentication Fctrader";
 	}, []);
 	const [loading, setLoading] = useState(false);
 	const [valid, setValid] = useState(false);
 	const [code, setCode] = useState("");
+	const { message_actions, twofactor_actions, auth_actions } = actions;
+	const message_action = bindActionCreators(message_actions, useDispatch());
+	const twofactor_action = bindActionCreators(twofactor_actions, useDispatch());
+	const auth_action = bindActionCreators(auth_actions, useDispatch());
 
-	if (!twofactordata.email && !twofactordata.email) {
+	const history = useHistory();
+
+	const { email, password } = useSelector((s) => s.twofactordata);
+	if (!email && !password) {
 		history.push(LOGIN);
 	}
 
@@ -53,8 +66,8 @@ export default function Factor2auth({ twofactordata, auth_action, message_action
 
 								<form className="mt-12" action="" method="POST" onSubmit={send}>
 									<div className="relative">
-										<input id="email" name="email" type="hidden" value={twofactordata.email} />
-										<input id="password" name="password" type="hidden" value={twofactordata.password} />
+										<input id="email" name="email" type="hidden" value={email} />
+										<input id="password" name="password" type="hidden" value={password} />
 										<input id="code" name="code" type="hidden" value={code} />
 										<CodeInput func={setValid} changeCode={setCode} />
 									</div>

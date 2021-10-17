@@ -5,13 +5,26 @@ import Transaction from "../components/simple/transactions";
 import Exchange from "../components/simple/exchanges";
 import Footer from "../components/simple/footer";
 import { definition } from "../constant/appname";
-import { REGISTER } from "../constant/routes";
+import { REGISTER, EXCHANGE } from "../constant/routes";
 import FlashMessage from "../components/messages/message";
 
+import { useSelector } from "react-redux";
 export default function Home() {
   useEffect(() => {
     document.title = "Bienvenue sur la " + definition;
   }, []);
+  const { is_auth } = useSelector((state) => state.auth);
+  const objects = {
+    data: is_auth
+      ? {
+          title: "Exchange",
+          path: EXCHANGE,
+        }
+      : {
+          title: "Débuter",
+          path: REGISTER,
+        },
+  };
 
   return (
     <>
@@ -35,8 +48,8 @@ export default function Home() {
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
-                    <Link to={REGISTER} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-                      Debuter
+                    <Link to={objects.data.path} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                      {objects.data.title}
                     </Link>
                   </div>
                 </div>

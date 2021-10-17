@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { REGISTER, LOGIN } from "../../constant/routes";
 import { name } from "../../constant/appname";
 import { Logo } from "../../icons";
-import { useSelector } from "react-redux";
+import { DashbordIcon, LoginIcon, RegisterIcon } from "../../icons";
 const navItem = [
   {
     title: "Company",
@@ -28,7 +29,7 @@ const Nav = ({ register }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth_state = useSelector((state) => state.auth);
   const objects = {
-    data: auth_state.is_auth ? { title: "Dashbord", path: "/dashbord" } : register ? { title: "Inscription", path: REGISTER } : { title: "Connexion", path: LOGIN },
+    data: auth_state.is_auth ? { title: "Dashbord", path: "/dashbord", svg: <DashbordIcon className="w-5 h-5 mr-1" /> } : register ? { title: "Inscription", path: REGISTER, svg: <RegisterIcon className="w-5 h-5 mr-1" /> } : { title: "Connexion", path: LOGIN, svg: <LoginIcon className="w-5 h-5 mr-1" /> },
   };
 
   return (
@@ -48,7 +49,8 @@ const Nav = ({ register }) => {
             );
           })}
           <li>
-            <Link to={objects.data.path} className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-transparent border border-purple-700 text-purple-700 hover:bg-purple-700 hover:text-white focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
+            <Link to={objects.data.path} className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-transparent border border-purple-700 text-purple-700 hover:bg-purple-700 hover:text-white focus:shadow-outline focus:outline-none" aria-label="Sign up" title={objects.data.title}>
+              {objects.data.svg}
               {objects.data.title}
             </Link>
           </li>
@@ -91,7 +93,8 @@ const Nav = ({ register }) => {
                     })}
 
                     <li>
-                      <Link to={objects.data.path} className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
+                      <Link to={objects.data.path} className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title={objects.data.title}>
+                        {objects.data.svg}
                         {objects.data.title}
                       </Link>
                     </li>

@@ -114,7 +114,9 @@ const Main = ({ data }) => {
         {/* transaction tables */}
         <section>
           <div>
-            <h3 className="text-2xl text-gray-800 my-1">Transation recents <TableIcon  className="w-8 inline"/></h3>
+            <h3 className="text-2xl text-gray-800 my-1">
+              Transation recents <TableIcon className="w-8 inline text-gray-800" />
+            </h3>
             <div>
               <div className="text-xs font-bold flex space-x-2 items-center my-2">
                 <span> Pour </span> <Listing datas={t_filter_time} /> <span> Status </span>
