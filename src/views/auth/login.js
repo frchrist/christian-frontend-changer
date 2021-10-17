@@ -49,7 +49,7 @@ export default function Login() {
 	};
 	return (
 		<>
-			<Nav />
+			<Nav register={true} />
 			<FlashMessage />
 			<div
 				className="selection:bg-indigo-500 selection:text-white flex "
@@ -68,11 +68,10 @@ export default function Login() {
 								</svg>
 							</div>
 							<div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
-								<div className="flex justify-center items-center">
-									<h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
-									<img src={logo} className="w-8 h-8" alt="logo" />{" "}
+								<div className="flex justify-center items-center space-x-1">
+									<img src={require("../../assets/logo.svg").default} className="w-8 h-8" alt="logo" /> <h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
 								</div>
-								<h3 className=" text-opacity-200 text-xl text-center leading-tight tracking-tight font-semibold text-indigo-900 mt-2">Indentifiez-vous ici pour commencer vos echanges</h3>
+								<h3 className=" text-opacity-200 text-xl text-center leading-tight tracking-tight font-semibold text-indigo-900 mt-2">Identifiez-vous ici pour commencer vos echanges</h3>
 
 								<div className="divide-y">
 									<form className="mt-6" action="" method="POST" onSubmit={send}>

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { REGISTER, LOGIN } from "../../constant/routes";
 import { name } from "../../constant/appname";
-
+import { Logo } from "../../icons";
+import { useSelector } from "react-redux";
 const navItem = [
   {
     title: "Company",
@@ -25,20 +26,16 @@ const navItem = [
 ];
 const Nav = ({ register }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let ACTION_LINK = register ? REGISTER : LOGIN;
-  let ACTION_NAME = register ? "Inscription" : "Connexion";
+  const auth_state = useSelector((state) => state.auth);
+  const objects = {
+    data: auth_state.is_auth ? { title: "Dashbord", path: "/dashbord" } : register ? { title: "Inscription", path: REGISTER } : { title: "Connexion", path: LOGIN },
+  };
 
   return (
-    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className="px-4 py-5 top-all fixed top-0 h-22 right-0 left-0 bg-white mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
         <a href="/" aria-label="Company" title="Company" className="inline-flex items-center">
-          <svg className="w-8 text-purple-400" viewBox="0 0 24 24" strokeLinejoin="round" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" stroke="currentColor" fill="none">
-            <rect x="3" y="1" width="7" height="12" />
-            <rect x="3" y="17" width="7" height="6" />
-            <rect x="14" y="1" width="7" height="6" />
-            <rect x="14" y="11" width="7" height="12" />
-          </svg>
-          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">{name}</span>
+          <Logo className="w-8" /> <span className="ml-2 text-lg font-bold tracking-wide text-gray-800 uppercase">{name}</span>
         </a>
         <ul className="ml-2 flex items-center hidden space-x-8 lg:flex">
           {navItem.map((item) => {
@@ -51,8 +48,8 @@ const Nav = ({ register }) => {
             );
           })}
           <li>
-            <Link to={ACTION_LINK} className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
-              {ACTION_NAME}
+            <Link to={objects.data.path} className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-transparent border border-purple-700 text-purple-700 hover:bg-purple-700 hover:text-white focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
+              {objects.data.title}
             </Link>
           </li>
         </ul>
@@ -70,13 +67,7 @@ const Nav = ({ register }) => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <a href="/" aria-label="Company" title="Company" className="inline-flex items-center">
-                      <svg className="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24" strokeLinejoin="round" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" stroke="currentColor" fill="none">
-                        <rect x="3" y="1" width="7" height="12" />
-                        <rect x="3" y="17" width="7" height="6" />
-                        <rect x="14" y="1" width="7" height="6" />
-                        <rect x="14" y="11" width="7" height="12" />
-                      </svg>
-                      <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Company</span>
+                      <Logo className="w-8" /> <span className="ml-2 text-lg font-bold tracking-wide text-gray-800 uppercase">{name}</span>
                     </a>
                   </div>
                   <div>
@@ -100,8 +91,8 @@ const Nav = ({ register }) => {
                     })}
 
                     <li>
-                      <Link to={ACTION_LINK} className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
-                        {ACTION_NAME}
+                      <Link to={objects.data.path} className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none" aria-label="Sign up" title="Sign up">
+                        {objects.data.title}
                       </Link>
                     </li>
                   </ul>

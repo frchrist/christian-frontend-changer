@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as messageactions from "../../state/actions/message";
 
@@ -11,7 +11,7 @@ import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
 import { AuthButton } from "../../components/buttons";
 import { reset_password_request } from "../../helpers/requests";
-import {LOGIN} from '../../constant/routes';
+import { LOGIN } from "../../constant/routes";
 export default function Restpassword() {
 	useEffect(() => {
 		document.title = "Mot de passe oublié ? Changer votre mot de passe";
@@ -45,24 +45,29 @@ export default function Restpassword() {
 								</svg>
 							</div>
 							<div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
-								<div className="flex justify-center items-center">
-									<h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
-									<img src={logo} className="w-8 h-8" alt="logo" />{" "}
+								<div className="flex justify-center items-center space-x-1">
+									<img src={require("../../assets/logo.svg").default} className="w-8 h-8" alt="logo" /> <h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
 								</div>
+
 								<h3 className="text-md text-center leading-tight tracking-tight font-semibold text-gray-700 mt-5">Entrez votre addresse email pour changer votre mot de passe</h3>
 								<section className="divide-y">
 									{/* start main form */}
-								<form className="mt-8" action="" method="POST" onSubmit={send}>
-									<div className="relative">
-										<Inputgroup type={"email"} id={"email"} name={"email"} label={"Addresse Email"} cls={"focus:border-indigo-600"} />
+									<form className="mt-8" action="" method="POST" onSubmit={send}>
+										<div className="relative">
+											<Inputgroup type={"email"} id={"email"} name={"email"} label={"Addresse Email"} cls={"focus:border-indigo-600"} />
+										</div>
+										<AuthButton loading={loading} cls={"bg-indigo-500 hover:bg-indigo-400"}>
+											Envoyer
+										</AuthButton>
+									</form>
+									{/* Ending of the main form */}
+									<div className="mt-4">
+										<span className="text-sm text-gray-400">Retourner à page de connexion ?</span>
+										<Link to={LOGIN} className="ml-1 inline-block text-sm te400er font-medium text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500">
+											{" "}
+											ici
+										</Link>
 									</div>
-									<AuthButton loading={loading} cls={"bg-indigo-500 hover:bg-indigo-400"}>Envoyer</AuthButton>
-								</form>
-								{/* Ending of the main form */}
-								<div className="mt-4">
-									<span className="text-sm text-gray-400">Retourner à page de connexion ?</span>
-									<Link to={LOGIN} className="ml-1 inline-block text-sm te400er font-medium text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500"> ici</Link>
-								</div>
 								</section>
 							</div>
 						</div>

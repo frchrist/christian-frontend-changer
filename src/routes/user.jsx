@@ -1,10 +1,7 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import refresh from "../helpers/requests/refresh";
-import { DASHBORD, LOGIN, EXCHANGE, SETTINGS } from "../constant/routes";
+import { DASHBORD, EXCHANGE, SETTINGS } from "../constant/routes";
 
-import { lazy, Suspense } from "react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 //actions

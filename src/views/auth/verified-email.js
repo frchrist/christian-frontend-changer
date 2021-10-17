@@ -76,9 +76,8 @@ export default function EmailVerification() {
 								</svg>
 							</div>
 							<div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
-								<div className="flex justify-center items-center">
-									<h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
-									<img src={logo} className="w-8 h-8" alt="logo" />{" "}
+								<div className="flex justify-center items-center space-x-1">
+									<img src={require("../../assets/logo.svg").default} className="w-8 h-8" alt="logo" /> <h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
 								</div>
 								<h3 className="text-md font-thin text-sky-800 mt-2">Entrez le code de véfication</h3>
 

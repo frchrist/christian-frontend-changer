@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Footer from "../../components/simple/footer";
 import Nav from "../../components/simple/nav";
 import { name as AppName, logo } from "../../constant/appname";
-import {LOGIN } from "../../constant/routes";
+import { LOGIN } from "../../constant/routes";
 
 import FlashMessage from "../../components/messages/message";
 import { Inputgroup } from "../../components/input";
@@ -22,25 +22,22 @@ export default function Resetpasswordcomplete() {
 	const m_actions = bindActionCreators(messageactions, dispatch);
 	const _h = useHistory();
 	const [loading, setLoading] = useState(false);
-	
-	if(!state.uidb64 || !state.token){
-		_h.push(LOGIN)
+
+	if (!state.uidb64 || !state.token) {
+		_h.push(LOGIN);
 	}
 	const send = (e) => {
-		setLoading(true)
+		setLoading(true);
 		e.preventDefault();
-		
-		if(document.getElementById("password").value === document.getElementById("password1").value){
-			
+
+		if (document.getElementById("password").value === document.getElementById("password1").value) {
 			reset_password_complete_request(e.target, setLoading, _h, m_actions);
-			return
-		}else{
-			setLoading(false)
+			return;
+		} else {
+			setLoading(false);
 			m_actions.showed({ tag: "warning", title: "Mot de passe", message: "Vos mots de passe ne correspondent pas !!!" });
-			return
+			return;
 		}
-		
-		
 	};
 	return (
 		<>
@@ -63,25 +60,24 @@ export default function Resetpasswordcomplete() {
 								</svg>
 							</div>
 							<div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
-								<div className="flex justify-center items-center">
-									<h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
-									<img src={logo} className="w-8 h-8" alt="logo" />{" "}
+								<div className="flex justify-center items-center space-x-1">
+									<img src={require("../../assets/logo.svg").default} className="w-8 h-8" alt="logo" /> <h1 className="text-2xl font-semibold text-gray-900 uppercase">{AppName}</h1>
 								</div>
 								<h3 className="text-md text-center leading-tight tracking-tight font-semibold text-gray-700 mt-5">Entrez le nouveau mot de passe</h3>
 
-								<form className="mt-12" action="" method="POST" onSubmit={send} >
+								<form className="mt-12" action="" method="POST" onSubmit={send}>
 									<input type="hidden" name="uidb64" value={state.uidb64} />
 									<input type="hidden" name="token" value={state.token} />
 									<div className="relative">
-										<Inputgroup type={"password"} id={"password"}
-										 label={"Nouveau Mot de passe"} name={"password"} cls={"focus:border-indigo-600"} 
-										 />
+										<Inputgroup type={"password"} id={"password"} label={"Nouveau Mot de passe"} name={"password"} cls={"focus:border-indigo-600"} />
 									</div>
 									<div className="relative mt-10">
 										<Inputgroup type={"password"} id={"password1"} label={"Confirmé le Mot de passe"} name={"password"} cls={"focus:border-indigo-600"} />
 									</div>
 
-									<AuthButton cls={"bg-indigo-400 focus:bg-indigo-600"} loading={loading}>Enregistrer</AuthButton>
+									<AuthButton cls={"bg-indigo-400 focus:bg-indigo-600"} loading={loading}>
+										Enregistrer
+									</AuthButton>
 								</form>
 							</div>
 						</div>

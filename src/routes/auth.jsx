@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { lazy, Suspense } from "react";
 
@@ -15,7 +15,7 @@ const Factor2auth = lazy(() => import("../views/auth/factor2auth"));
 
 function AuthRoutes() {
 	return (
-		<div className="auth">
+		<div className="auth mt-20">
 			<Suspense fallback={<Authloader />}>
 				<Switch>
 					<Route path={LOGIN} exact>
