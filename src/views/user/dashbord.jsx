@@ -1,9 +1,5 @@
-import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
-import logout_request from "../../helpers/requests/logout";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
 import FlashMessage from "../../components/messages/message";
 import Head from "../../components/head";
 import { name } from "../../constant/appname";
@@ -13,15 +9,12 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import ApexChart from "../../components/chart";
-import {authentication_actions} from "../../state/actions"
 const Dashboard = () => {
-
   useEffect(() => {
     document.title = " Bienvenue sur " + name;
   }, []);
-  const auth_state = useSelector(s=>s.auth)
   const currentUser = {
-    info: auth_state,
+    info: { username: "user" },
   };
   return (
     <>

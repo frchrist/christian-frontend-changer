@@ -1,37 +1,35 @@
 import axioInstance from "../axios";
 import { FACTOR2AUTH, DASHBORD, EMAIL_VERIFICATION } from "../../constant/routes";
-
-const log = (form, obj) => {
-	//obj = {history, setLoading, authicatte, setError}
-	const formdata = new FormData(form);
-	let data = {};
-	formdata.forEach((v, k) => {
-		data[k] = v;
-	});
+import { show } from "../../features/messageSlice";
+import { success } from "../../features/loginSlice";
+import { signin } from "../../features/userSlice";
+const log = (data) => {
+	const { dispatch, form, setLoading, history } = data;
+	const formData = new FormData(form);
 	axioInstance
-		.post("/user/signin/", data, { withCredentials: true })
+		.post("/user/signin/", formData, { withCredentials: true })
 		.then((response) => {
+			setLoading(false);
 			if (response.data.redirect) {
-				obj.setting(data);
-				obj.history.push(FACTOR2AUTH);
-				obj.showed({ tag: "info", title: "Vérification", message: "vérifier votre addresse email" });
-				obj.login_action.success();
+				const login = { email: formData.get("email"), password: formData.get("password") };
+				dispatch(success(login));
+				dispatch(show({ tag: "info", title: "Code PTO", message: "two factor authentication" }));
+				history.push(FACTOR2AUTH);
 				return;
 			}
-			obj.login_action.success();
-			obj.authenticate(response.data);
-			obj.showed({ tag: "success", title: "Connecté", message: "Bienvenue " + response.data.username });
-			obj.history.push(DASHBORD);
+			dispatch(signin(response.data));
+			dispatch(show({ tag: "success", title: "Connecté", message: "Bienvenue " + response.data.username }));
+			history.push(DASHBORD);
 			return;
 		})
 		.catch((error) => {
 			let msg = "";
-			obj.login_action.failed({ errors: error?.response?.data?.detail });
+			setLoading(false);
 			if (error.response?.data?.detail === "Email address is not verified") {
-				localStorage.setItem("email", data.email);
-				axioInstance.post("/user/refresh/email/verification/code", { email: data.email });
-				obj.history.push(EMAIL_VERIFICATION);
-				obj.showed({ tag: "info", title: "Redirect", message: "please active your email address" });
+				localStorage.setItem("email", formData.get("email"));
+				axioInstance.post("/user/refresh/email/verification/code", { email: formData.get("email") });
+				dispatch(show({ tag: "info", title: "Redirect", message: "please active your email address" }));
+				history.push(EMAIL_VERIFICATION);
 				return;
 			}
 			if (error.response) {
@@ -40,7 +38,7 @@ const log = (form, obj) => {
 				msg = "Le serveur ne répond pas !!!";
 			}
 
-			obj.showed({ tag: "warning", title: "Error", message: msg });
+			dispatch(show({ tag: "warning", title: "Authentication Failed", message: msg }));
 			return;
 		});
 };

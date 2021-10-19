@@ -1,15 +1,13 @@
 import axioInstance from "../axios";
-// import { LOGIN } from "../../constant/routes";
+import { refresh, signout } from "../../features/userSlice";
 
-const  refresh = async (setter, log, history) => {
-	try{
-		const response = await axioInstance.post("/user/token/refresh/", {}, { withCredentials: true })
-		setter(response.data);
-		return
-	}catch(e){
-		log();
-		return;
-	}	
+const refreshHttpRequest = async ({ dispatch }) => {
+	try {
+		const response = await axioInstance.post("/user/token/refresh/", {}, { withCredentials: true });
+		dispatch(refresh(response.data));
+	} catch (e) {
+		dispatch(signout());
+	}
 };
 
-export default refresh;
+export default refreshHttpRequest;

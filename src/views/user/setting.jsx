@@ -1,7 +1,7 @@
 import Head from "../../components/head";
 import FlashMessage from "../../components/messages/message";
 
-export default () => {
+const Settings = () => {
   return (
     <>
       <Head />
@@ -10,6 +10,7 @@ export default () => {
     </>
   );
 };
+export default Settings;
 
 const Main = () => {
   return (
@@ -17,7 +18,7 @@ const Main = () => {
       <div className="mb-3 bg-white p-3 rounded-lg shadow-md">
         <div className="user-profile-avatar mx-auto p-3 rounded-sm flex space-x-4 items-center">
           <div className="avatar">
-          <img src="./btc.png" alt="" className="w-20 h-20  border-white shadow-lg border-8 rounded-full"/>
+            <img src="./btc.png" alt="" className="w-20 h-20  border-white shadow-lg border-8 rounded-full" />
           </div>
           <div>
             <div className="flex text-green-500">
@@ -26,9 +27,9 @@ const Main = () => {
             <div>
               <p>
                 <span className="text-md text-gray-700 uppercase font-semibold">Email</span> : <span className="font-light">username@gmail.com </span>
-              <a href="#" className="text-sky-900 text-xs underline ml-5">Changer</a>
-
-
+                <a href="/" className="text-sky-900 text-xs underline ml-5">
+                  Changer
+                </a>
               </p>
               <p>
                 <span className="text-md text-gray-700 uppercase font-semibold">Status</span> : <span className="font-light">valider</span>
@@ -42,9 +43,9 @@ const Main = () => {
           </div>
         </div>
         <div class="action flex space-x-3">
-                    <button class="border shadow-md bg-indigo-800 text-white rounded-md px-2 py-1" >Changer Image</button>
-                    <button class="border shadow-md border-indigo-800 text-indigo-800 rounded-md px-2 py-1">Supprimé Photo</button>
-                </div>
+          <button class="border shadow-md bg-indigo-800 text-white rounded-md px-2 py-1">Changer Image</button>
+          <button class="border shadow-md border-indigo-800 text-indigo-800 rounded-md px-2 py-1">Supprimé Photo</button>
+        </div>
         <div className="lg:flex justify-between">
           <section className="user-base-informations w-full lg:w-1/2">
             <div className="p-4 bg-white">
@@ -111,14 +112,12 @@ const Main = () => {
           </form>
         </section>
         <section class="p-3">
-                    <h3 class="text-xl text-sky-800 uppercase font-semibold">Supprimé Compte</h3>
-                    <p class="text-gray-600">
-                        would you like delete your account ? 
-                        this account contains  10 transactions 10 Dollar. Deleting your account will remove all the content associated with it.
-                    </p>
-                    <a href="#" class="text-red-600 text-md underline">Je veux supprimer mon compte</a>
-
-                </section>
+          <h3 class="text-xl text-sky-800 uppercase font-semibold">Supprimé Compte</h3>
+          <p class="text-gray-600">would you like delete your account ? this account contains 10 transactions 10 Dollar. Deleting your account will remove all the content associated with it.</p>
+          <a href="/" class="text-red-600 text-md underline">
+            Je veux supprimer mon compte
+          </a>
+        </section>
       </div>
     </main>
   );

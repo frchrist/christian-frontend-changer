@@ -2,19 +2,24 @@ import { useEffect } from "react";
 import { reset_password_done_request } from "../../helpers/requests";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import {authentication_actions} from "../../state/actions";
+import { Isauthloader } from "../../components/simple/loaders";
 export default function Restpassword() {
 	useEffect(() => {
 		document.title = "redirect ..";
 	}, []);
-	const { message_actions, reset_password_actions } = authentication_actions;
 	const { uidb64, token } = useParams();
 	const dispatch = useDispatch();
-	const { datavalid, settoken } = bindActionCreators(reset_password_actions, dispatch);
-	const _a = bindActionCreators(message_actions, dispatch);
-	const _h = useHistory();
-	reset_password_done_request(token, uidb64, datavalid, settoken, _a, _h);
+	const history = useHistory();
+	const params = {
+		data: {
+			uidb64,
+			token,
+		},
+		history,
+		dispatch,
+	};
 
-	return <div>loading ...</div>;
+	reset_password_done_request(params);
+
+	return <Isauthloader />;
 }

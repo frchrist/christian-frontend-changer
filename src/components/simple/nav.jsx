@@ -27,9 +27,9 @@ const navItem = [
 ];
 const Nav = ({ register }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const auth_state = useSelector((state) => state.auth);
+  const auth_state = useSelector((state) => state.user);
   const objects = {
-    data: auth_state.is_auth ? { title: "Dashbord", path: "/dashbord", svg: <DashbordIcon className="w-5 h-5 mr-1" /> } : register ? { title: "Inscription", path: REGISTER, svg: <RegisterIcon className="w-5 h-5 mr-1" /> } : { title: "Connexion", path: LOGIN, svg: <LoginIcon className="w-5 h-5 mr-1" /> },
+    data: auth_state.token ? { title: "Dashbord", path: "/dashbord", svg: <DashbordIcon className="w-5 h-5 mr-1" /> } : register ? { title: "Inscription", path: REGISTER, svg: <RegisterIcon className="w-5 h-5 mr-1" /> } : { title: "Connexion", path: LOGIN, svg: <LoginIcon className="w-5 h-5 mr-1" /> },
   };
 
   return (

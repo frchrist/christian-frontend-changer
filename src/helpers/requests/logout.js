@@ -1,10 +1,11 @@
 import axioInstance from "../axios";
-const logout = (state_actions, history) => {
+import { signout } from "../../features/userSlice";
+const logout = ({ history, dispatch }) => {
 	axioInstance
 		.post("/user/signout/", {}, { withCredentials: true })
 
 		.then((response) => {
-			state_actions.logout();
+			dispatch(signout());
 			history.push("/");
 		})
 		.catch((e) => {});

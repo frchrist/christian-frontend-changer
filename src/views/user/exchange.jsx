@@ -2,7 +2,7 @@ import Head from "../../components/head";
 import FlashMessage from "../../components/messages/message";
 import { Triangle } from "../../icons";
 
-export default () => {
+function Exchange() {
   return (
     <>
       <Head />
@@ -10,7 +10,8 @@ export default () => {
       <Main />
     </>
   );
-};
+}
+export default Exchange;
 
 const Main = () => {
   return (
@@ -39,7 +40,7 @@ const Main = () => {
                   <div className="item relative flex items-center h-12 cursor-pointer hover:bg-indigo-200 px-3 py-2 rounded-md">
                     <input type="radio" name="cur_01" id="id_cur_btc" className="hidden select-item" />
                     <label htmlFor="id_cur_btc" className="flex items-center space-x-3 h-12 w-full">
-                      <img src="./btc.png" alt className="w-8 h-8" />
+                      <img src="./btc.png" alt="" className="w-8 h-8" />
                       <span>BTC</span>
                     </label>
                   </div>
@@ -56,21 +57,21 @@ const Main = () => {
                   <div className="item flex relative items-center h-12 cursor-pointer hover:bg-indigo-200 px-3 py-2 rounded-md">
                     <input type="radio" name="cur_02" id="id_dev_btc" className="select-item hidden" />
                     <label htmlFor="id_dev_btc" className="flex items-center space-x-3 h-12 w-full">
-                      <img src="./btc.png" alt className="w-8 h-8" />
+                      <img src="./btc.png" alt="" className="w-8 h-8" />
                       <span>BTC</span>
                     </label>
                   </div>
                   <div className="item flex relative items-center h-12 cursor-pointer hover:bg-indigo-200 px-3 py-2 rounded-md">
                     <input type="radio" name="cur_02" id="id_dev_eth" className="select-item hidden" />
                     <label htmlFor="id_dev_eth" className="flex items-center space-x-3 h-12 w-full">
-                      <img src="./eth.png" alt className="w-8 h-8" />
+                      <img src="./eth.png" alt="" className="w-8 h-8" />
                       <span>ETH</span>
                     </label>
                   </div>
                   <div className="item flex  relative items-center h-12 cursor-pointer hover:bg-indigo-200 px-3 py-2 rounded-md">
                     <input type="radio" name="cur_02" id="id_dev_ltc" className="select-item hidden " />
                     <label htmlFor="id_dev_ltc" className="flex items-center space-x-3 h-12 w-full">
-                      <img src="./ltc.png" alt className="w-8 h-8" />
+                      <img src="./ltc.png" alt="" className="w-8 h-8" />
                       <span>LTC</span>
                     </label>
                   </div>
@@ -144,14 +145,14 @@ const Main = () => {
           <div className="info bg-gray-100 p-3 rounded-md w-96 text-lg text-gray-600 shadow-lg">
             <h3 className="text-3xl text-gray-800 my-4">Validation d' infomations</h3>
             <div className="flex space-x-2">
-              <img src="./ltc.png" alt className="h-9 w-9" />
+              <img src="./ltc.png" alt="" className="h-9 w-9" />
               <div>
                 <span>Qantité LTC</span>
                 <span className="text-md text-green-600 font-bold  ml-2">10 Ltc</span>
               </div>
             </div>
             <div className="flex space-x-2 mt-4">
-              <img src="./btc.png" alt className="h-9 w-9" />
+              <img src="./btc.png" alt="" className="h-9 w-9" />
               <div>
                 <span>Equivalent BTC</span>
                 <span className="text-md text-pink-600 font-bold ml-2">0.3 BTC</span>

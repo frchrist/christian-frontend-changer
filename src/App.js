@@ -1,46 +1,19 @@
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 //decodé et le mettre dans le state de registration
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import {authentication_actions} from "./state/actions";
-import { useEffect, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import "./App.css";
 import Home from "./views/home";
 import { Faq } from "./views/faq";
 import { Isauthloader } from "./components/simple/loaders";
 import Handle404 from "./views/errors/4O4";
 import Ref from "./views/auth/ref";
-import refresh from "./helpers/requests/refresh";
+import { useSelector } from "react-redux";
 
 const AuthRoutes = lazy(() => import("./routes/auth"));
 const UserRoutes = lazy(() => import("./routes/user"));
 
 function App() {
-	const { auth } = useSelector((state) => state);
-	const dispatch = useDispatch();
-	const {auth_actions} = authentication_actions;
-	const auth_action = bindActionCreators(auth_actions, dispatch);
-	useEffect(() => {
-		if (auth.is_auth === undefined) {
-			refresh(auth_action.authenticate, auth_action.logout);
-		}
-	});
-
-	useEffect(() => {
-		let timer = setInterval(() => {
-			if (auth.is_auth === true) {
-				refresh(auth_action.authenticate, auth_action.logout);
-			}
-		}, 1000 * 60 * 5);
-		return function () {
-			clearInterval(timer);
-		};
-	});
-
-	if (auth.is_auth === undefined) {
-		return <Isauthloader />;
-	}
-
+	const auth = useSelector((s) => s.user);
 	return (
 		<div className="App">
 			<BrowserRouter>

@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     document.title = "Bienvenue sur la " + definition;
   }, []);
-  const { is_auth } = useSelector((state) => state.auth);
+  const { token: is_auth } = useSelector((state) => state.user);
   const objects = {
     data: is_auth
       ? {
