@@ -4,3 +4,8 @@
 
 [context.production.environment]
   REACT_APP_BACKENDURL ="https://backend-olichange.herokuapp.com/api/"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
